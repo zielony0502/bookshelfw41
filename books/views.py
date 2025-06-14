@@ -22,3 +22,14 @@ class AddAuthorView(View):
         last_name = request.POST['last_name']
         Author.objects.create(first_name=first_name, last_name=last_name)
         return HttpResponseRedirect(reverse('add_author'))
+
+class DeleteAuthorView(View):
+    def get(self, request, pk):
+        author = Author.objects.get(pk=pk)
+        return render(request, 'books/delete_author.html', {'author': author})
+
+    def post(self, request, pk):
+        if request.POST['operation'] == 'Tak':
+            author = Author.objects.get(pk=pk)
+            author.delete()
+        return HttpResponseRedirect(reverse('add_author'))

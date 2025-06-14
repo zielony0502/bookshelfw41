@@ -11,7 +11,8 @@
     <div>
             <ul>
                 {% for author in authors %}
-                    <li>{{ author.first_name }} {{ author.last_name }}</li>
+                    <li>{{ author.first_name }} {{ author.last_name }}
+                        <a href="{% url 'delete_author' author.pk %}"><button>X</button></a> </li>
                 {% endfor %}
             </ul>
     </div>
