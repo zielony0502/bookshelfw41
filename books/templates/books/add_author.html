@@ -1,13 +1,6 @@
 {% extends 'base.html' %}
 {% block zawartosc %}
-    <div>
-        <form method="POST">
-            {% csrf_token %}
-            <p><input type="text" name="first_name" placeholder="Imie"></p>
-            <p><input type="text" name="last_name" placeholder="Nazwisko"></p>
-            <p><input type="submit"></p>
-        </form>
-    </div>
+    {% include 'books/author_form.html' %}
     <div>
             <ul>
                 {% for author in authors %}
