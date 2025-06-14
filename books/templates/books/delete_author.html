@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block zawartosc %}
+    <div>
+        <p>
+            Czy jesteś pewien że chcesz usunąć autora
+            {{ author.first_name }} {{ author.last_name }}?
+        </p>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" name="operation" value="Tak">
+            <input type="submit" name="operation" value="Nie">
+        </form>
+    </div>
+{% endblock %}
+
