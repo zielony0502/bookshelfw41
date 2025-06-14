@@ -22,4 +22,5 @@ from books import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", TemplateView.as_view(template_name='base.html'), name="home"),
+    path("dodaj_ksiazke/", views.AddBookView.as_view(), name="add_book"),
 ]
