@@ -14,7 +14,8 @@ class AddBookView(View):
 
 class AddAuthorView(View):
     def get(self, request):
-        return render(request, 'books/add_author.html')
+        authors = Author.objects.all()
+        return render(request, 'books/add_author.html', {'authors': authors})
 
     def post(self, request):
         first_name = request.POST['first_name']
