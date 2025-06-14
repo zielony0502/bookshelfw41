@@ -25,4 +25,6 @@ urlpatterns = [
     path("dodaj_ksiazke/", views.AddBookView.as_view(), name="add_book"),
     path("dodaj_autora/", views.AddAuthorView.as_view(), name="add_author"),
     path("usun_autora/<int:pk>/", views.DeleteAuthorView.as_view(), name="delete_author"),
+    path("zmien_autora/<int:pk>/", views.UpdateAuthorView.as_view(), name="update_author"),
+    path("add_publisher/", views.AddPublisherView.as_view(), name="add_publisher"),
 ]

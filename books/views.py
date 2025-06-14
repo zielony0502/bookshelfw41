@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 
-from books.models import Author
+from books.forms import AddPublisherForm
+from books.models import Author, Publisher
 
 
 # Create your views here
@@ -33,3 +34,34 @@ class DeleteAuthorView(View):
             author = Author.objects.get(pk=pk)
             author.delete()
         return HttpResponseRedirect(reverse('add_author'))
+
+class UpdateAuthorView(View):
+    def get(self, request, pk):
+        author = Author.objects.get(pk=pk)
+        return render(request, 'books/update_author.html', {'author': author})
+
+    def post(self, request, pk):
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        author = Author.objects.get(pk=pk)
+        author.first_name = first_name
+        author.last_name = last_name
+        author.save()
+        return HttpResponseRedirect(reverse('update_author', args=[pk]))
+
+
+class AddPublisherView(View):
+    def get(self, request):
+        form = AddPublisherForm()
+        return render(request, 'books/add_form.html', {'form': form})
+
+    def post(self, request):
+        form = AddPublisherForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            year = form.cleaned_data['year']
+            Publisher.objects.create(name=name, year=year)
+            return HttpResponseRedirect(reverse('add_publisher'))
+        return render(request, 'books/add_form.html', {'form': form})
+
+

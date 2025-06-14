@@ -5,7 +5,9 @@
             <ul>
                 {% for author in authors %}
                     <li>{{ author.first_name }} {{ author.last_name }}
-                        <a href="{% url 'delete_author' author.pk %}"><button>X</button></a> </li>
+                        <a href="{% url 'delete_author' author.pk %}"><button>X</button></a>
+                        <a href="{% url 'update_author' author.pk %}"><button>U</button></a>
+                    </li>
                 {% endfor %}
             </ul>
     </div>
