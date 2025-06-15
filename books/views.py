@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from books.models import Author, Publisher
+from books.forms import AddPublisherForm
 
 
 class AddAuthorView(View):
@@ -48,13 +49,17 @@ class UpdateAuthorView(View):
 class AddPublisherView(View):
     def get(self, request):
         publishers = Publisher.objects.all()
-        return render(request, 'books/add_publisher.html', {'publishers': publishers})
+        form = AddPublisherForm()
+        return render(request, 'books/add_publisher.html', {'publishers': publishers, 'form': form})
 
     def post(self, request):
-        name = request.POST['name']
-        year = request.POST['year']
-        Publisher.objects.create(name=name, year=year)
-        return HttpResponseRedirect(reverse('add_publisher'))
+        form = AddPublisherForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            year = form.cleaned_data['year']
+            Publisher.objects.create(name=name, year=year)
+            return HttpResponseRedirect(reverse('add_publisher'))
+        return render(request, 'books/add_publisher.html', {'form': form})
 
 
 class DeletePublisher(View):
@@ -82,3 +87,7 @@ class UpdatePublisherView(View):
         publisher.year = year
         publisher.save()
         return HttpResponseRedirect(reverse('add_publisher'))
+
+
+
+
