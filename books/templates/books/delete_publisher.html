@@ -6,11 +6,5 @@
             Czy jesteś pewien że chcesz ununąć wydawnictwo {{ publisher.name }}
         </p>
     </div>
-    <div>
-        <form method="POST">
-            {% csrf_token %}
-            <input type="submit" name="operation" value="Tak">
-            <input type="submit" name="operation" value="Nie">
-        </form>
-    </div>
+    {% include 'books/delete_form.html' %}
 {% endblock %}

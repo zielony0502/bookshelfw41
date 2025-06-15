@@ -1,0 +1,8 @@
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        <p><input type="text" name="name" value="{{ publisher.name }}" placeholder="Wydawnictwo"></p>
+        <p><input type="text" name="year" value="{{ publisher.year }}" placeholder="Rok założenia"></p>
+        <p><input type="submit" value="Wyślij"></p>
+    </form>
+</div>
