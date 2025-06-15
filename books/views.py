@@ -3,15 +3,11 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 
-from books.forms import AddPublisherForm
+from books.forms import AddPublisherForm, AddBookForm
 from books.models import Author, Publisher
 
 
 # Create your views here
-
-class AddBookView(View):
-    def get(self, request):
-        return render(request, 'books/add_book.html')
 
 class AddAuthorView(View):
     def get(self, request):
@@ -65,3 +61,14 @@ class AddPublisherView(View):
         return render(request, 'books/add_form.html', {'form': form})
 
 
+class AddBookView(View):
+    def get(self, request):
+        form = AddBookForm()
+        return render(request, 'books/add_form.html', {'form': form})
+
+    def post(self, request):
+        form = AddBookForm(request.POST)
+        if form.is_valid():
+            book = form.save()
+            return HttpResponseRedirect(reverse('add_book'))
+        return render(request, 'books/add_form.html', {'form': form})
