@@ -68,3 +68,17 @@ class DeletePublisher(View):
             publisher.delete()
         return HttpResponseRedirect(reverse('add_publisher'))
 
+
+class UpdatePublisherView(View):
+    def get(self, request, pk):
+        publisher = Publisher.objects.get(pk=pk)
+        return render(request, 'books/update_publisher.html', {'publisher': publisher})
+
+    def post(self, request, pk):
+        name = request.POST['name']
+        year = request.POST['year']
+        publisher = Publisher.objects.get(pk=pk)
+        publisher.name = name
+        publisher.year = year
+        publisher.save()
+        return HttpResponseRedirect(reverse('add_publisher'))

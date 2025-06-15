@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block zawartosc %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <p><input type="text" name="name" value="{{ publisher.name }}"></p>
+            <p><input type="text" name="year" value="{{ publisher.year }}"></p>
+            <p><input type="submit" value="Wyślij"></p>
+        </form>
+    </div>
+{% endblock %}

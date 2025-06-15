@@ -15,6 +15,7 @@
                 <li>
                     {{ publisher.name }} {{ publisher.year }}
                     <a href="{% url 'delete_publisher' publisher.pk %}"><button>Usuń</button></a>
+                    <a href="{% url 'update_publisher' publisher.pk %}"><button>Edytuj</button></a>
                 </li>
             {% endfor %}
         </ul>
