@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block zawartosc %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <p><input type="text" name="name" placeholder="Wydawnictwo"></p>
+            <p><input type="text" name="year" placeholder="Rok założenia"></p>
+            <p><input type="submit" value="Wyślij"></p>
+        </form>
+    </div>
+    <div>
+        <ul>
+            {% for publisher in publishers %}
+                <li>
+                    {{ publisher.name }} {{ publisher.year }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

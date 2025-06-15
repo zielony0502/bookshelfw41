@@ -3,7 +3,7 @@ from django.views import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from books.models import Author
+from books.models import Author, Publisher
 
 
 class AddAuthorView(View):
@@ -44,3 +44,14 @@ class UpdateAuthorView(View):
         author.save()
         return HttpResponseRedirect(reverse('add_author'))
 
+
+class AddPublisherView(View):
+    def get(self, request):
+        publishers = Publisher.objects.all()
+        return render(request, 'books/add_publisher.html', {'publishers': publishers})
+
+    def post(self, request):
+        name = request.POST['name']
+        year = request.POST['year']
+        Publisher.objects.create(name=name, year=year)
+        return HttpResponseRedirect(reverse('add_publisher'))
