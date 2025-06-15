@@ -49,7 +49,7 @@ class UpdateAuthorView(View):
 class AddPublisherView(View):
     def get(self, request):
         form = AddPublisherForm()
-        return render(request, 'books/add_form.html', {'form': form})
+        return render(request, 'add_form.html', {'form': form})
 
     def post(self, request):
         form = AddPublisherForm(request.POST)
@@ -58,33 +58,33 @@ class AddPublisherView(View):
             year = form.cleaned_data['year']
             Publisher.objects.create(name=name, year=year)
             return HttpResponseRedirect(reverse('add_publisher'))
-        return render(request, 'books/add_form.html', {'form': form})
+        return render(request, 'add_form.html', {'form': form})
 
 
 class AddBookView(View):
     def get(self, request):
         form = AddBookForm()
-        return render(request, 'books/add_form.html', {'form': form})
+        return render(request, 'add_form.html', {'form': form})
 
     def post(self, request):
         form = AddBookForm(request.POST)
         if form.is_valid():
             book = form.save()
             return HttpResponseRedirect(reverse('add_book'))
-        return render(request, 'books/add_form.html', {'form': form})
+        return render(request, 'add_form.html', {'form': form})
 
 
 class AddGenereView(View):
     def get(self, request):
         form = AddGenreForm()
-        return render(request, 'books/add_form.html', {'form': form})
+        return render(request, 'add_form.html', {'form': form})
 
     def post(self, request):
         form = AddGenreForm(request.POST)
         if form.is_valid():
             ganre = form.save()
             return HttpResponseRedirect(reverse('add_genre'))
-        return render(request, 'books/add_form.html', {'form': form})
+        return render(request, 'add_form.html', {'form': form})
 
 
 class BookListView(View):
