@@ -38,16 +38,20 @@ class DeleteAuthorView(View):
 class UpdateAuthorView(View):
     def get(self, request, pk):
         author = Author.objects.get(pk=pk)
-        return render(request, 'books/update_author.html', {'author': author})
+        form = AddAuthorForm(initial={'first_name': author.first_name, 'last_name': author.last_name})
+        return render(request, 'books/update_author.html', {'author': author, 'form': form})
 
     def post(self, request, pk):
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        author = Author.objects.get(pk=pk)
-        author.first_name = first_name
-        author.last_name = last_name
-        author.save()
-        return HttpResponseRedirect(reverse('add_author'))
+        form = AddAuthorForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            author = Author.objects.get(pk=pk)
+            author.first_name = first_name
+            author.last_name = last_name
+            author.save()
+            return HttpResponseRedirect(reverse('add_author'))
+        return render(request, 'books/add_author.html', {'form': form})
 
 
 class AddPublisherView(View):
@@ -81,17 +85,20 @@ class DeletePublisher(View):
 class UpdatePublisherView(View):
     def get(self, request, pk):
         publisher = Publisher.objects.get(pk=pk)
-        return render(request, 'books/update_publisher.html', {'publisher': publisher})
+        form = AddPublisherForm(initial={'name': publisher.name, 'year': publisher.year})
+        return render(request, 'books/update_publisher.html', {'publisher': publisher, 'form': form})
 
     def post(self, request, pk):
-        name = request.POST['name']
-        year = request.POST['year']
-        publisher = Publisher.objects.get(pk=pk)
-        publisher.name = name
-        publisher.year = year
-        publisher.save()
-        return HttpResponseRedirect(reverse('add_publisher'))
-
+        form = AddPublisherForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            year = form.cleaned_data['year']
+            publisher = Publisher.objects.get(pk=pk)
+            publisher.name = name
+            publisher.year = year
+            publisher.save()
+            return HttpResponseRedirect(reverse('add_publisher'))
+        return render(request, 'books/add_publisher.html', {'form': form})
 
 
 
