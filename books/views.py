@@ -55,3 +55,16 @@ class AddPublisherView(View):
         year = request.POST['year']
         Publisher.objects.create(name=name, year=year)
         return HttpResponseRedirect(reverse('add_publisher'))
+
+
+class DeletePublisher(View):
+    def get(self, request, pk):
+        publisher = Publisher.objects.get(pk=pk)
+        return render(request, 'books/delete_publisher.html', {'publisher': publisher})
+
+    def post(self, request, pk):
+        if request.POST['operation'] == 'Tak':
+            publisher = Publisher.objects.get(pk=pk)
+            publisher.delete()
+        return HttpResponseRedirect(reverse('add_publisher'))
+
