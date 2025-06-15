@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.models import Permission
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -64,17 +66,18 @@ class AddPublisherView(View):
 class AddBookView(View):
     def get(self, request):
         form = AddBookForm()
-        return render(request, 'add_form.html', {'form': form})
+        return render(request, 'add_form.html', {'form': form, 'data':'dupa'})
 
     def post(self, request):
         form = AddBookForm(request.POST)
         if form.is_valid():
             book = form.save()
             return HttpResponseRedirect(reverse('add_book'))
-        return render(request, 'add_form.html', {'form': form})
+        return render(request, 'add_form.html', {'form': form, })
 
 
-class AddGenereView(View):
+class AddGenereView(PermissionRequiredMixin, View):
+    permission_required = ['books.add_genre', 'books.change_genre', 'books.add_book']
     def get(self, request):
         form = AddGenreForm()
         return render(request, 'add_form.html', {'form': form})
@@ -87,7 +90,7 @@ class AddGenereView(View):
         return render(request, 'add_form.html', {'form': form})
 
 
-class BookListView(View):
+class BookListView(LoginRequiredMixin, View):
     def get(self, request):
         form = BookSearchForm(request.GET)
         books = Book.objects.all()
@@ -96,4 +99,5 @@ class BookListView(View):
         else:
             title = ''
         books = books.filter(title__icontains=title)
-        return render(request, 'books/obj_list.html', {'obj_list': books, 'form': form})
+        permissions = Permission.objects.all()
+        return render(request, 'books/obj_list.html', {'obj_list': books, 'form': form, 'pers':permissions})

@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -36,5 +36,12 @@ class LoginView(View):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                next_url = request.GET.get('next', 'home')
+                return redirect(next_url)
         return render(request, 'add_form.html', {'form': form, 'error':'nie prawidłowe dane logowania'})
+
+class LogoutView(View):
+
+    def get(self, request):
+        logout(request)
+        return redirect('home')

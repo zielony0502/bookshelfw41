@@ -5,11 +5,17 @@
     <title>Title</title>
 </head>
 <body>
+{{ data }}
 Start Aplikacji {% if user.is_authenticated %} Witaj {{ user.username }} {% endif %}
 {%  include 'links.html' %}
 
 {% block zawartosc %}
     <p>tutaj beda zawartośći stron</p>
 {% endblock %}
+{% if liczba == 50%}
+    <h1>wygrałeś</h1>
+{% else %}
+    <h3>{{ liczba }}</h3>
+{% endif %}
 </body>
 </html>

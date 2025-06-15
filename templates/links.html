@@ -4,9 +4,16 @@
     <a href="{% url 'list_book' %}">Książki</a>
     <a href="{% url 'add_author' %}">Dodaj autora</a>
     <a href="{% url 'add_publisher' %}">Dodaj wydawce</a>
-    <a href="{% url 'add_genre' %}">Dodaj gatunek</a>
+    {% if perms.books.add_genre  %}
+     <a href="{% url 'add_genre' %}">Dodaj gatunek</a>
+    {% endif %}
+
 </div>
 <div>
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}">logout</a>
+    {% else %}
     <a href="{% url 'register' %}">załóz konto</a>
     <a href="{% url 'login' %}">login</a>
+    {% endif %}
 </div>
