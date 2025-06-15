@@ -1,6 +1,6 @@
 from django import forms
 
-from books.models import Book
+from books.models import Book, Genre
 
 
 class AddPublisherForm(forms.Form):
@@ -13,3 +13,12 @@ class AddBookForm(forms.ModelForm):
         model = Book
         fields = "__all__"
 
+        widgets = {
+            'genres': forms.CheckboxSelectMultiple(),
+        }
+
+class AddGenreForm(forms.ModelForm):
+
+    class Meta:
+        model = Genre
+        fields = "__all__"

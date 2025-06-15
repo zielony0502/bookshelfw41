@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 
-from books.forms import AddPublisherForm, AddBookForm
+from books.forms import AddPublisherForm, AddBookForm, AddGenreForm
 from books.models import Author, Publisher
 
 
@@ -71,4 +71,17 @@ class AddBookView(View):
         if form.is_valid():
             book = form.save()
             return HttpResponseRedirect(reverse('add_book'))
+        return render(request, 'books/add_form.html', {'form': form})
+
+
+class AddGenereView(View):
+    def get(self, request):
+        form = AddGenreForm()
+        return render(request, 'books/add_form.html', {'form': form})
+
+    def post(self, request):
+        form = AddGenreForm(request.POST)
+        if form.is_valid():
+            ganre = form.save()
+            return HttpResponseRedirect(reverse('add_genre'))
         return render(request, 'books/add_form.html', {'form': form})
