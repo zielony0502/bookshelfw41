@@ -4,19 +4,23 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from books.models import Author, Publisher
-from books.forms import AddPublisherForm
+from books.forms import AddPublisherForm, AddAuthorForm
 
 
 class AddAuthorView(View):
     def get(self, request):
         authors = Author.objects.all()
-        return render(request, 'books/add_author.html', {'authors': authors})
+        form = AddAuthorForm()
+        return render(request, 'books/add_author.html', {'authors': authors, 'form': form})
 
     def post(self, request):
-        first_name = request.POST['first_name']
-        last_name  =request.POST['last_name']
-        Author.objects.create(first_name=first_name, last_name=last_name)
-        return HttpResponseRedirect(reverse('add_author'))
+        form = AddAuthorForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            Author.objects.create(first_name=first_name, last_name=last_name)
+            return HttpResponseRedirect(reverse('add_author'))
+        return render(request, 'books/add_author.html', {'form': form})
 
 
 class DeleteAuthorView(View):
