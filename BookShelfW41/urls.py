@@ -28,4 +28,5 @@ urlpatterns = [
     path("zmien_autora/<int:pk>/", views.UpdateAuthorView.as_view(), name="update_author"),
     path("add_publisher/", views.AddPublisherView.as_view(), name="add_publisher"),
     path("add_genre/", views.AddGenereView.as_view(), name="add_genre"),
+    path("list_book/", views.BookListView.as_view(), name="list_book"),
 ]

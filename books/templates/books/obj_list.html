@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+    <div>
+    <form method="GET">
+        {{ form.as_ul }}
+        <input type="submit">
+    </form>
+    </div>
+    <ul>
+    {% for obj in obj_list %}
+        <li>{{ obj }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

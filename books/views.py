@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 
-from books.forms import AddPublisherForm, AddBookForm, AddGenreForm
-from books.models import Author, Publisher
+from books.forms import AddPublisherForm, AddBookForm, AddGenreForm, BookSearchForm
+from books.models import Author, Publisher, Book
 
 
 # Create your views here
@@ -85,3 +85,15 @@ class AddGenereView(View):
             ganre = form.save()
             return HttpResponseRedirect(reverse('add_genre'))
         return render(request, 'books/add_form.html', {'form': form})
+
+
+class BookListView(View):
+    def get(self, request):
+        form = BookSearchForm(request.GET)
+        books = Book.objects.all()
+        if form.is_valid():
+            title = form.cleaned_data.get('title', '')
+        else:
+            title = ''
+        books = books.filter(title__icontains=title)
+        return render(request, 'books/obj_list.html', {'obj_list': books, 'form': form})
