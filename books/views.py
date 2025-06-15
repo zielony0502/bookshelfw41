@@ -28,3 +28,19 @@ class DeleteAuthorView(View):
             author = Author.objects.get(pk=pk)
             author.delete()
         return HttpResponseRedirect(reverse('add_author'))
+
+
+class UpdateAuthorView(View):
+    def get(self, request, pk):
+        author = Author.objects.get(pk=pk)
+        return render(request, 'books/update_author.html', {'author': author})
+
+    def post(self, request, pk):
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        author = Author.objects.get(pk=pk)
+        author.first_name = first_name
+        author.last_name = last_name
+        author.save()
+        return HttpResponseRedirect(reverse('add_author'))
+

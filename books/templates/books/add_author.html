@@ -8,6 +8,7 @@
                 <li>
                     {{ author.first_name }} {{ author.last_name }}
                     <a href="{% url 'delete_author' author.pk %}"><button>Usuń</button></a>
+                    <a href="{% url 'update_author' author.pk %}"><button>Edytuj</button></a>
                 </li>
             {% endfor %}
         </ul>
