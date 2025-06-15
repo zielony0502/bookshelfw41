@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-Start Aplikacji
+Start Aplikacji {% if user.is_authenticated %} Witaj {{ user.username }} {% endif %}
 {%  include 'links.html' %}
 
 {% block zawartosc %}
