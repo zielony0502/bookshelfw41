@@ -5,5 +5,12 @@
 {% endblock %}
 
 {% block zawartosc %}
-    <p>To jest ZAWARTOŚĆ pochodząca z pliku <b>add_director.html</b></p>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <p><input type="text" name="first_name" placeholder="Imię"></p>
+            <p><input type="text" name="last_name" placeholder="Nazwisko"></p>
+            <p><input type="submit" value="Dodaj reżysera"></p>
+        </form>
+    </div>
 {% endblock %}
