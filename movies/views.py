@@ -13,7 +13,8 @@ class AddMovieView(View):
 
 class AddDirectorView(View):
     def get(self, request):
-        return render(request, 'movies/add_director.html')
+        directors = Director.objects.all()
+        return render(request, 'movies/add_director.html', {"directors": directors})
 
     def post(self, request):
         first_name = request.POST['first_name']

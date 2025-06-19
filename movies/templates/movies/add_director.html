@@ -13,4 +13,12 @@
             <p><input type="submit" value="Dodaj reżysera"></p>
         </form>
     </div>
+    <div>
+        <h3>Lista reżyserów:</h3>
+        <ul>
+            {% for director in directors %}
+                <li>{{ director.first_name }} {{ director.last_name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
