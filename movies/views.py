@@ -21,3 +21,15 @@ class AddDirectorView(View):
         last_name = request.POST['last_name']
         Director.objects.create(first_name=first_name, last_name=last_name)
         return HttpResponseRedirect(reverse('dodaj_rezysera'))
+
+
+class DeleteDirectorView(View):
+    def get(self, request, pk):
+        director = Director.objects.get(pk=pk)
+        return render(request, 'movies/delete_director.html', {'director': director})
+
+    def post(self, request, pk):
+        if request.POST['choice'] == 'Tak':
+            director = Director.objects.get(pk= pk)
+            director.delete()
+        return HttpResponseRedirect(reverse('dodaj_rezysera'))

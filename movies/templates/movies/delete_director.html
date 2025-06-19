@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block zawartosc %}
+    <div>
+        <p>Czy na pewno chcesz usunąć reżysera <b>{{ director.first_name }} {{ director.last_name }}</b>?</p>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" name="choice" value="Tak">
+            <input type="submit" name="choice" value="Nie">
+        </form>
+    </div>
+{% endblock %}

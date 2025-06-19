@@ -17,7 +17,9 @@
         <h3>Lista reżyserów:</h3>
         <ul>
             {% for director in directors %}
-                <li>{{ director.first_name }} {{ director.last_name }}</li>
+                <li>{{ director.first_name }} {{ director.last_name }}
+                    <a href="{% url 'usun_rezysera' director.pk %}"><button>Usuń</button></a>
+                </li>
             {% endfor %}
         </ul>
     </div>
