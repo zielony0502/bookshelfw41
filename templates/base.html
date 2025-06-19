@@ -5,6 +5,22 @@
     <title>Music</title>
 </head>
 <body>
-    Aplikacja Movies
+    <div>
+        <h3>Aplikacja: movies</h3>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/add_movie">Dodaj film</a></li>
+        </ul>
+    </div>
+    <div>
+        {% block opis %}
+            <p>W tym miejscu będzie znajdował się OPIS aplikacji movies</p>
+        {% endblock %}
+    </div>
+    <div>
+        {% block zawartosc %}
+            <p>W tym miejscu będzie znajdowała się ZAWARTOŚĆ aplikacji movies</p>
+        {% endblock %}
+    </div>
 </body>
 </html>

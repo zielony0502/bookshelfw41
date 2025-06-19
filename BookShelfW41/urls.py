@@ -8,4 +8,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', TemplateView.as_view(template_name='base.html'), name='home'),
+    path('add_movie/', views.AddMovieView.as_view(), name='dodaj_film')
 ]
