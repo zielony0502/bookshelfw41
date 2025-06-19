@@ -5,3 +5,8 @@ from django.views import View
 class AddMovieView(View):
     def get(self, request):
         return render(request, 'movies/add_movie.html')
+
+
+class AddDirectorView(View):
+    def get(self, request):
+        return render(request, 'movies/add_director.html')
