@@ -5,14 +5,7 @@
 {% endblock %}
 
 {% block zawartosc %}
-    <div>
-        <form method="POST">
-            {% csrf_token %}
-            <p><input type="text" name="first_name" placeholder="Imię"></p>
-            <p><input type="text" name="last_name" placeholder="Nazwisko"></p>
-            <p><input type="submit" value="Dodaj reżysera"></p>
-        </form>
-    </div>
+    {% include 'movies/director_fields.html' %}
     <div>
         <h3>Lista reżyserów:</h3>
         <ul>

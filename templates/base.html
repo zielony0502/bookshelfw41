@@ -7,11 +7,7 @@
 <body>
     <div>
         <h3>Aplikacja: movies</h3>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="{% url 'dodaj_film' %}">Dodaj film</a></li>
-            <li><a href="{% url 'dodaj_rezysera' %}">Dodaj reżysera</a></li>
-        </ul>
+        {% include 'movies/director_links.html' %}
     </div>
     <div>
         {% block opis %}

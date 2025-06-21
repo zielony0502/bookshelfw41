@@ -6,12 +6,6 @@
 
 {% block zawartosc %}
     <div>
-        <form method="POST">
-            {% csrf_token %}
-            <p><input type="text" name="first_name" placeholder="Imię"></p>
-            <p><input type="text" name="last_name" placeholder="Nazwisko>"></p>
-            <input type="submit" name="choice" value="Zapisz">
-            <input type="submit" name="choice" value="Anuluj">
-        </form>
+        {% include 'movies/director_fields.html' %}
     </div>
 {% endblock %}
