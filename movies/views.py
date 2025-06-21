@@ -33,3 +33,20 @@ class DeleteDirectorView(View):
             director = Director.objects.get(pk= pk)
             director.delete()
         return HttpResponseRedirect(reverse('dodaj_rezysera'))
+
+
+class UpdateDirectorView(View):
+    def get(self, request, pk):
+        director = Director.objects.get(pk=pk)
+        return render(request, 'movies/update_director.html', {'director': director})
+
+    def post(self, request, pk):
+        if request.POST['choice'] == 'Zapisz':
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            director  =Director.objects.get(pk=pk)
+            director.first_name = first_name
+            director.last_name = last_name
+            director.save()
+        return HttpResponseRedirect(reverse('dodaj_rezysera'))
+

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block opis %}
+    <p>To jest OPIS pochodzący z pliku <b>update_director.html</b></p>
+{% endblock %}
+
+{% block zawartosc %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <p><input type="text" name="first_name" placeholder="Imię"></p>
+            <p><input type="text" name="last_name" placeholder="Nazwisko>"></p>
+            <input type="submit" name="choice" value="Zapisz">
+            <input type="submit" name="choice" value="Anuluj">
+        </form>
+    </div>
+{% endblock %}

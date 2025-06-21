@@ -19,6 +19,7 @@
             {% for director in directors %}
                 <li>{{ director.first_name }} {{ director.last_name }}
                     <a href="{% url 'usun_rezysera' director.pk %}"><button>Usuń</button></a>
+                    <a href="{% url 'edytuj_rezysera' director.pk %}"><button>Edytuj</button></a>
                 </li>
             {% endfor %}
         </ul>

@@ -11,4 +11,5 @@ urlpatterns = [
     path('add_movie/', views.AddMovieView.as_view(), name='dodaj_film'),
     path('add_director/', views.AddDirectorView.as_view(), name='dodaj_rezysera'),
     path('delete_director/<int:pk>/', views.DeleteDirectorView.as_view(), name='usun_rezysera'),
+    path('update_director/<int:pk>/', views.UpdateDirectorView.as_view(), name='edytuj_rezysera')
 ]
