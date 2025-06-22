@@ -1,0 +1,9 @@
+<div>
+    <form method="POST">
+        {% csrf_token %}
+            <p><input type="text" name="name" value="{{ company.name }}" placeholder="Nazwa"></p>
+            <p><input type="text" name="country" value="{{ company.country }}" placeholder="Kraj"></p>
+            <input type="submit" name="choice" value="Zapisz">
+            <input type="submit" name="choice" value="Anuluj">
+    </form>
+</div>

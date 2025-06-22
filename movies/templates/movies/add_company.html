@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block opis %}
+    <p>To jest OPIS pochodzący z pliku <b>add_company.html</b></p>
+{% endblock %}
+
+{% block zawartosc %}
+    {% include 'movies/company_fields.html' %}
+    <div>
+        <h3>Lista wytwórni:</h3>
+        <ul>
+            {% for company in companies %}
+                <li>
+                    {{ company.name }} {{ company.country }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

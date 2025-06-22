@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 
-from movies.models import Director
+from movies.models import Director, Company
 
 
 class AddMovieView(View):
@@ -49,4 +49,17 @@ class UpdateDirectorView(View):
             director.last_name = last_name
             director.save()
         return HttpResponseRedirect(reverse('dodaj_rezysera'))
+
+
+class AddCompanyView(View):
+    def get(self, request):
+        companies = Company.objects.all()
+        return render(request, 'movies/add_company.html', {'companies': companies})
+
+    def post(self, request):
+        if request.POST['choice'] == 'Zapisz':
+            name = request.POST['name']
+            country = request.POST['country']
+            Company.objects.create(name=name, country=country)
+        return HttpResponseRedirect(reverse('dodaj_wytwornie'))
 
