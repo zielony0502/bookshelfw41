@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.views import View
 
 from movies.models import Director, Company
+from movies.forms import AddDirectorForm
 
 
 class AddMovieView(View):
@@ -17,9 +18,10 @@ class AddDirectorView(View):
         return render(request, 'movies/add_director.html', {"directors": directors})
 
     def post(self, request):
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        Director.objects.create(first_name=first_name, last_name=last_name)
+        if request.POST['choice'] == 'Zapisz':
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            Director.objects.create(first_name=first_name, last_name=last_name)
         return HttpResponseRedirect(reverse('dodaj_rezysera'))
 
 
@@ -90,3 +92,18 @@ class UpdateCompanyView(View):
             company.country = country
             company.save()
         return HttpResponseRedirect(reverse('dodaj_wytwornie'))
+
+
+class AddDirectorFormView(View):
+    def get(self, request):
+        form = AddDirectorForm()
+        return render(request, 'movies/add_director_form.html', {'form': form})
+
+    def post(self, request):
+        form = AddDirectorForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            Director.objects.create(first_name=first_name, last_name=last_name)
+            return HttpResponseRedirect(reverse('dodaj_rezysera'))
+        return render(request, 'movies/add_director_form.html', {'form': form})

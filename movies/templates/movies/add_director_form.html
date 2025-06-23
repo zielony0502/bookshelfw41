@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block opis %}
+    <p>To jest OPIS pochodzący z pliku <b>add_director_form.html</b></p>
+{% endblock %}
+
+{% block zawartosc %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="choice" value="Zapisz">
+            <input type="submit" name="choice" value="Anuluj"
+        </form>
+    </div>
+{% endblock %}
