@@ -74,3 +74,19 @@ class DeleteCompanyView(View):
             company = Company.objects.get(pk=pk)
             company.delete()
         return HttpResponseRedirect(reverse('dodaj_wytwornie'))
+
+
+class UpdateCompanyView(View):
+    def get(self, request, pk):
+        company = Company.objects.get(pk=pk)
+        return render(request, 'movies/update_company.html', {'company': company})
+
+    def post(self, request, pk):
+        if request.POST['choice'] == 'Zapisz':
+            name = request.POST['name']
+            country = request.POST['country']
+            company = Company.objects.get(pk=pk)
+            company.name = name
+            company.country = country
+            company.save()
+        return HttpResponseRedirect(reverse('dodaj_wytwornie'))
