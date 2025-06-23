@@ -63,3 +63,14 @@ class AddCompanyView(View):
             Company.objects.create(name=name, country=country)
         return HttpResponseRedirect(reverse('dodaj_wytwornie'))
 
+
+class DeleteCompanyView(View):
+    def get(self, request, pk):
+        company = Company.objects.get(pk=pk)
+        return render(request, 'movies/delete_company.html', {'company': company})
+
+    def post(self, request, pk):
+        if request.POST['choice'] == 'Tak':
+            company = Company.objects.get(pk=pk)
+            company.delete()
+        return HttpResponseRedirect(reverse('dodaj_wytwornie'))

@@ -14,4 +14,5 @@ urlpatterns = [
     path('update_director/<int:pk>/', views.UpdateDirectorView.as_view(), name='edytuj_rezysera'),
 
     path('add_company/', views.AddCompanyView.as_view(), name='dodaj_wytwornie'),
+    path('delete_company/<int:pk>/', views.DeleteCompanyView.as_view(), name='usun_wytwornie'),
 ]

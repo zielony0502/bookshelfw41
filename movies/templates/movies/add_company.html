@@ -12,6 +12,7 @@
             {% for company in companies %}
                 <li>
                     {{ company.name }} {{ company.country }}
+                    <a href="{% url 'usun_wytwornie' company.pk %}"><button>Usuń</button></a>
                 </li>
             {% endfor %}
         </ul>
