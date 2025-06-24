@@ -18,4 +18,6 @@ urlpatterns = [
     path('update_company/<int:pk>/', views.UpdateCompanyView.as_view(), name='edytuj_wytwornie'),
 
     path('add_director_form/', views.AddDirectorFormView.as_view(), name='dodaj_rezysera_form'),
+
+    path('add_company_form/', views.AddCompanyFormView.as_view(), name='dodaj_wytwornie_form'),
 ]

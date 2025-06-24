@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import View
 
 from movies.models import Director, Company
-from movies.forms import AddDirectorForm
+from movies.forms import AddDirectorForm, AddCompanyForm
 
 
 class AddMovieView(View):
@@ -100,10 +100,29 @@ class AddDirectorFormView(View):
         return render(request, 'movies/add_director_form.html', {'form': form})
 
     def post(self, request):
-        form = AddDirectorForm(request.POST)
-        if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            Director.objects.create(first_name=first_name, last_name=last_name)
-            return HttpResponseRedirect(reverse('dodaj_rezysera'))
+        if request.POST['choice'] == 'Zapisz':
+            form = AddDirectorForm(request.POST)
+            if form.is_valid():
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                Director.objects.create(first_name=first_name, last_name=last_name)
+                return HttpResponseRedirect(reverse('dodaj_rezysera_form'))
+        form = AddDirectorForm()
         return render(request, 'movies/add_director_form.html', {'form': form})
+
+
+class AddCompanyFormView(View):
+    def get(self, request):
+        form = AddCompanyForm()
+        return render(request, 'movies/add_company_form.html', {'form': form})
+
+    def post(self, request):
+        if request.POST['choice'] == 'Zapisz':
+            form = AddCompanyForm(request.POST)
+            if form.is_valid():
+                name = form.cleaned_data['name']
+                country = form.cleaned_data['country']
+                Company.objects.create(name=name, country=country)
+                return HttpResponseRedirect(reverse('dodaj_wytwornie_form'))
+        form = AddCompanyForm()
+        return render(request, 'movies/add_company_form.html', {'form': form})
