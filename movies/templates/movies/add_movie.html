@@ -5,5 +5,10 @@
 {% endblock %}
 
 {% block zawartosc %}
-    <p>To jest ZAWARTOŚĆ pochodząca z pliku add_movies.html</p>
+    <div>
+        <h3>Lista filmów:</h3>
+        {% for movie in movies %}
+            <li>{{ movie.title }} - {{ movie.director }} (Reżyser), {{ movie.company }} (Wytwórnia)</li>
+        {% endfor %}
+    </div>
 {% endblock %}

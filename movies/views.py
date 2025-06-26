@@ -3,13 +3,14 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 
-from movies.models import Director, Company
-from movies.forms import AddDirectorForm, AddCompanyForm
+from movies.models import Director, Company, Movie
+from movies.forms import AddDirectorForm, AddCompanyForm, AddMovieForm
 
 
 class AddMovieView(View):
     def get(self, request):
-        return render(request, 'movies/add_movie.html')
+        movies = Movie.objects.all()
+        return render(request, 'movies/add_movie.html', {'movies': movies})
 
 
 class AddDirectorView(View):
@@ -126,3 +127,21 @@ class AddCompanyFormView(View):
                 return HttpResponseRedirect(reverse('dodaj_wytwornie_form'))
         form = AddCompanyForm()
         return render(request, 'movies/add_company_form.html', {'form': form})
+
+
+class AddMovieFormView(View):
+    def get(self, request):
+        form = AddMovieForm()
+        return render(request, 'movies/add_movie_form.html', {'form': form})
+
+    def post(self, request):
+        if request.POST['choice'] == 'Zapisz':
+            form = AddMovieForm(request.POST)
+            if form.is_valid():
+                title = form.cleaned_data['title']
+                director = form.cleaned_data['director']
+                company = form.cleaned_data['company']
+                Movie.objects.create(title=title, director=director, company=company)
+                return HttpResponseRedirect(reverse('dodaj_film_form'))
+        form = AddMovieForm()
+        return render(request, 'movies/add_movie_form.html', {'form': form})

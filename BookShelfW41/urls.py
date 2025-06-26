@@ -20,4 +20,6 @@ urlpatterns = [
     path('add_director_form/', views.AddDirectorFormView.as_view(), name='dodaj_rezysera_form'),
 
     path('add_company_form/', views.AddCompanyFormView.as_view(), name='dodaj_wytwornie_form'),
+
+    path('add_movie_form/', views.AddMovieFormView.as_view(), name='dodaj_film_form'),
 ]
