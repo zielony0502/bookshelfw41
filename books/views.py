@@ -2,8 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.auth.models import Permission
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
+from django.views.generic import CreateView
 
 from books.forms import AddPublisherForm, AddBookForm, AddGenreForm, BookSearchForm
 from books.models import Author, Publisher, Book
@@ -74,6 +75,15 @@ class AddBookView(View):
             book = form.save()
             return HttpResponseRedirect(reverse('add_book'))
         return render(request, 'add_form.html', {'form': form, })
+
+
+# class AddBookView(CreateView):
+#     model = Book
+#     form_class = AddBookForm
+#     template_name = 'add_form.html'
+#     success_url = reverse_lazy('add_book')
+#
+
 
 
 class AddGenereView(PermissionRequiredMixin, View):
